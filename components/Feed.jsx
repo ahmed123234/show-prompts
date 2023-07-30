@@ -16,7 +16,7 @@ const PromptCardList = ({ data, handleTagClick }) => (
 const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [posts, setPosts] = useState([]);
-
+  const [filteredPosts, setFilteredPosts] = useState([])
   // const handleSearchChange = (e) => {
   //   setSearchText(e.target.value);
   // }
@@ -25,18 +25,29 @@ const Feed = () => {
     
     const fetchPosts = async () => {
       console.log("search is ", searchText);
-      const respone = await fetch(`api/prompt?q=${searchText}`);
+      const respone = await fetch(`api/prompt`);
 
       const data = await respone.json();
       console.log(data);
 
       if (data) {
         setPosts(data)
+        setFilteredPosts(data)
       }
     }
 
     fetchPosts();
-  }, [searchText])
+  }, []);
+
+  const handleTextChange = (e) => {
+    setSearchText(e.target.value); 
+    setFilteredPosts( 
+      posts.filter(post => 
+        post.tag.toLowerCase().includes(searchText.toLowerCase()) ||
+        post.prompt.toLowerCase().includes(searchText.toLowerCase()) ||
+        post.creator.username.toLowerCase().includes(searchText.toLowerCase())
+      ))
+  }
 
   return (
     <section className="feed">
@@ -44,13 +55,13 @@ const Feed = () => {
         <input type="text" 
           placeholder="Search for a tag or a username"
           value= {searchText}
-          onChange={(e) =>  setSearchText(e.target.value)}
-          required
+          onChange={(e) => handleTextChange(e) }
+          // required
           className="search_input peer"
         />
       </form>
 
-      <PromptCardList  data={posts} handleTagClick={() => {}}/>
+      <PromptCardList  data={filteredPosts} handleTagClick={(tag) => { setSearchText(tag) } }/>
     </section>
   )
 }
