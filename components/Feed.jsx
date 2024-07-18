@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { PromptCard } from '@components'
 
 const PromptCardList = ({ data, handleTagClick }) => (
-  <div className="mt-16 prompt_layout">
+  <div className="mt-16 prompt_layout" data-test='prompt-cards'>
     {data.map((post) => (
       <PromptCard key={post.id}
         post={post}
@@ -50,7 +50,7 @@ const Feed = () => {
   }
 
   return (
-    <section className="feed">
+    <section className="feed" data-test='feed-cont'>
       <form className="relative w-full flex-center">
         <input type="text" 
           placeholder="Search for a tag or a username"

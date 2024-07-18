@@ -11,16 +11,16 @@ import {signIn, signOut, useSession, getProviders } from 'next-auth/react'
 
 const LoginOrRegister = ({ providers }) => (
   <>
-            {providers && Object.values(providers).map((provider) => (
-              <button type="button"
-                key={ provider.name }
-                onClick={() => signIn(provider.id)}
-                className="black_btn"
-              >
-                sign in by {provider.name}
-              </button>
-            )) }
-          </>
+    {providers && Object.values(providers).map((provider) => (
+      <button type="button"
+        key={ provider.name }
+        onClick={() => signIn(provider.id)}
+        className="black_btn"
+      >
+        sign in by {provider.name}
+      </button>
+    )) }
+  </>
 )
 
 const Nav = () => {
@@ -54,7 +54,7 @@ const Nav = () => {
       </Link>
 
       {/* Desktop Navigation */}
-      <div className="hidden md:flex">
+      <div className="hidden md:flex" data-test='nav-bar'>
         {session?.user ? (
           <div className="flex gap-3 sm:gap-5">
             <Link href='/create-prompt'

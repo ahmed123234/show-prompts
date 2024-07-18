@@ -21,7 +21,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   }
 
   return (
-    <div className="prompt_card">
+    <div className="prompt_card" data-test={`card-${post.id}`}>
       <div className="flex items-start justify-between gap-5">
         <div className="flex items-center justify-start flex-1 gap-3 cursor-pointer">
           <Image src={post?.creator?.image} width={40} height={40} alt="user_image"

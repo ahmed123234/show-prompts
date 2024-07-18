@@ -3,7 +3,12 @@ import Prompt from "@models/prompt";
 
 export const POST = async (req) => {
     const { userId, prompt, tag } = await req.json();
-
+    if(!userId) {
+        return new Response({message: "You are not allowed to access the resource"}, { status: 403 });
+    }
+    if(!prompt || !tag) {
+        return new Response({message: "Missing parameters"}, { status: 400 });
+    }
     try {
         await connectToDB();
         // TODO add logic to create post in database and return success message
@@ -20,6 +25,6 @@ export const POST = async (req) => {
 
     } catch(err) {
         console.log("Error: ", err);
-        return new Response('Failed to create a new prompt', { status: 500 });
+        return new Response({ error: 'Failed to create a new prompt' }, { status: 500 });
     }
 }

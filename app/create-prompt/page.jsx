@@ -31,11 +31,12 @@ const createPrompt = () => {
             })
 
             if (response.ok) {
+                console.log(response.body)
                 router.push('/')
             }
 
         } catch(err) {
-            console.error('Error creating new Prompt:', err);
+            console.log('Error creating new Prompt:', err);
         } finally {
             setSubmitting(false);
         }
