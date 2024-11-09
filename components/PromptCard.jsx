@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
+
 import { set } from "mongoose";
 
 const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
@@ -24,7 +25,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
     <div className="prompt_card" data-test={`card-${post.id}`}>
       <div className="flex items-start justify-between gap-5">
         <div className="flex items-center justify-start flex-1 gap-3 cursor-pointer">
-          <Image src={post?.creator?.image} width={40} height={40} alt="user_image"
+          <Image src={post?.creator?.image || '/assets/images/profile.png'} width={40} height={40} alt="user_image"
             className="object-contain rounded-full "
           />
           <div className="flex flex-col">
@@ -45,6 +46,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
               ? '/assets/icons/tick.svg'
               : '/assets/icons/copy.svg'
             }
+            alt="post"
             width={12}
             height={12}
           />

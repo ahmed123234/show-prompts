@@ -45,11 +45,6 @@ describe('craete prompt spec', () => {
       failOnStatusCode: false
       
     })
-    // cy.request('POST', '/api/prompt/new', {
-    //   "prompt": '',
-    //   "tags":'',
-    //   "userId": ''
-    // })
     cy.get('@AI-prompt');
     cy.get('@tag');
     // cy.getByDataTest('submit').click();
